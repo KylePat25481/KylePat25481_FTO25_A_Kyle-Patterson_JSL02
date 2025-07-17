@@ -1,12 +1,9 @@
-// Function to prompt for a single task's data
 function getTask(taskNumber) {
   const task = {};
 
-  // Prompt for title and description once
   task.title = prompt(`Enter title for Task ${taskNumber}:`);
   task.description = prompt(`Enter description for Task ${taskNumber}:`);
 
-  // Loop until a valid status is provided
   while (true) {
     let statusInput = prompt(`Enter status for Task ${taskNumber} (todo, doing, done):`);
     if (!statusInput) continue;
@@ -24,17 +21,20 @@ function getTask(taskNumber) {
   return task;
 }
 
-// Function to handle task entry and logging
 function handleTaskEntry() {
   const task1 = getTask(1);
   const task2 = getTask(2);
-
   const tasks = [task1, task2];
 
-  // Filter tasks with status "done"
+  console.log("Task Entries:");
+  tasks.forEach((task, index) => {
+    console.log(`Task ${index + 1} → Title: ${task.title}, Description: ${task.description}, Status: ${task.status}`);
+  });
+
   const completedTasks = tasks.filter(task => task.status === "done");
 
   if (completedTasks.length > 0) {
+    console.log("Completed Tasks:");
     completedTasks.forEach(task => {
       console.log(`Title: ${task.title}, status: ${task.status}`);
     });
@@ -43,5 +43,4 @@ function handleTaskEntry() {
   }
 }
 
-// Run on page load
 window.onload = handleTaskEntry;
